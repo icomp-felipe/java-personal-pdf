@@ -18,34 +18,6 @@ import com.phill.libs.files.PhillFileUtils;
  *  @version 1.0, 27/MAR/2023 */
 public class LibreOfficePDFExporter {
 
-    public static void main(String[] args) throws Exception {
-    	
-    	final File inputDir = new File("/Windows/Felipe's Files/Google Drive/Isenções PSI 2023/Rose/Indeferidos");
-    	final File outputDir = new File("/opt/indefs-pdf");
-    	
-    	List<File> filtered = PhillFileUtils.filterByExtension(inputDir, "docx"); Collections.sort(filtered);
-    	
-    	final Map<String, Object> filterData = new HashMap<>();
-    	filterData.put("ExportFormFields", false);
-
-    	final Map<String, Object> customProperties = new HashMap<>();
-    	customProperties.put("Overwrite", true);
-    	customProperties.put("FilterData", filterData);
-    	
-    	int i = 1;
-    	
-    	for (File docx: filtered) {
-    		
-   			final File pdf = new File(outputDir, docx.getName().replaceAll("(?i)docx","pdf"));
-    			
-   			System.out.printf("Processando arquivo %d/%d: '%s'\n", i++, filtered.size(), pdf.getName());
-    			
-   			toPDF(docx, pdf, customProperties);
-    			
-    	}
-    	
-    }
-    
     /** Converts a stream of bytes to PDF format.
      *  @param source - source (array of bytes)
      *  @param format - format of the generated array of bytes
