@@ -41,7 +41,7 @@ public class LibreOfficePDFExporter {
         	.as(DefaultDocumentFormatRegistry.PDF)
         	.execute();
     	
-    	OfficeUtils.stopQuietly(officeManager);
+    	officeManager.stop();
     	
     }
     
@@ -70,7 +70,7 @@ public class LibreOfficePDFExporter {
         	.as(DefaultDocumentFormatRegistry.PDF)
         	.execute();
     	
-    	OfficeUtils.stopQuietly(officeManager);
+    	officeManager.stop();
     	
     }
 
