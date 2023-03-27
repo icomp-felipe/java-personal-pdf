@@ -11,8 +11,6 @@ import org.jodconverter.local.office.*;
 import org.jodconverter.core.document.*;
 import org.jodconverter.core.office.*;
 
-import com.phill.libs.files.PhillFileUtils;
-
 /** Most reliable class to convert files to PDF format, using a pre-installed LibreOffice.
  *  @author Felipe André - felipeandresouza@hotmail.com
  *  @version 1.0, 27/MAR/2023 */
