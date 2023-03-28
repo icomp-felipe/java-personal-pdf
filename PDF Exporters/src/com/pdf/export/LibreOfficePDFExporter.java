@@ -11,6 +11,8 @@ import org.jodconverter.local.office.*;
 import org.jodconverter.core.document.*;
 import org.jodconverter.core.office.*;
 
+import com.pdf.export.concurrent.*;
+
 /** Most reliable class to convert files to PDF format, using a pre-installed LibreOffice.
  *  @author Felipe André - felipeandresouza@hotmail.com
  *  @version 1.0, 27/MAR/2023 */
@@ -71,6 +73,46 @@ public class LibreOfficePDFExporter {
         	.execute();
     	
     	officeManager.stop();
+    	
+    }
+    
+    public static void runPDF(final File source, final File target, final Map<String, Object> options, final LocalOfficeManager officeManager) throws IOException, OfficeException {
+    	
+    	final String extension = FilenameUtils.getExtension(source.getName());
+    	
+    	System.out.println("Generating " + target.getName()); System.out.flush();
+    	
+    	LocalConverter.builder()
+        	.storeProperties(options)
+        	.officeManager(officeManager)
+        	.build()
+        	.convert(source)
+        	.as(DefaultDocumentFormatRegistry.getFormatByExtension(extension))
+        	.to(target)
+        	.as(DefaultDocumentFormatRegistry.PDF)
+        	.execute();
+    	
+    	
+    }
+    
+    public static void toPDF(final List<File> sourceFiles, final File targetDir, final Map<String, Object> options, final boolean turboMode) throws IOException, OfficeException {
+    	
+    	final int threads = turboMode ? Runtime.getRuntime().availableProcessors() : 1;
+    	
+    	final ThreadPool threadPool = new ThreadPool(threads);
+    	
+    	final LocalOfficeManager officeManager = LocalOfficeManager.install(); officeManager.start();
+    	
+    	for (File source: sourceFiles) {
+    		
+    		String targetName = FilenameUtils.removeExtension(source.getName()) + ".pdf";
+    		File target = new File(targetDir, targetName);
+    		
+    		Runnable job = () -> { try { runPDF(source, target, options, officeManager); } catch (Exception exception) { exception.printStackTrace(); } };
+    		
+    		threadPool.execute(job);
+    		
+    	}
     	
     }
 
