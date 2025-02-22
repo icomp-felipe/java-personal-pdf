@@ -7,7 +7,7 @@ import org.apache.poi.xwpf.usermodel.*;
 import fr.opensagres.poi.xwpf.converter.pdf.*;
 
 /** Lightweight class to convert .docx files to PDF format using Apache POI.
- *  @author Felipe André - felipeandresouza@hotmail.com
+ *  @author Felipe André - felipeandre.eng@gmail.com
  *  @version 1.0, 27/MAR/2023 */
 public class SimplePDFExporter {
 	

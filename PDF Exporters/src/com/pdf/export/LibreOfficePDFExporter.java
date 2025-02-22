@@ -14,7 +14,7 @@ import org.jodconverter.core.office.*;
 import com.pdf.export.concurrent.*;
 
 /** Most reliable class to convert files to PDF format, using a pre-installed LibreOffice.
- *  @author Felipe André - felipeandresouza@hotmail.com
+ *  @author Felipe André - felipeandre.eng@gmail.com
  *  @version 1.0, 27/MAR/2023 */
 public class LibreOfficePDFExporter {
 
